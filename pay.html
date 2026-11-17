@@ -1,0 +1,13 @@
+<!DOCTYPE html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BANISHREE KALANIKETAN – Fee Payment</title>
+<style>body{font-family:system-ui,Segoe UI,Roboto,sans-serif;background:#f5f2f8;margin:0;color:#2b2233}.top{background:#5a1650;color:#fff;padding:18px;text-align:center;border-bottom:4px solid #f2b632}.top b{font-size:20px}
+.c{max-width:420px;margin:16px auto;background:#fff;border-radius:14px;padding:18px;box-shadow:0 4px 14px rgba(0,0,0,.08)}.r{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #eee}.amt{font-size:30px;font-weight:800;color:#b91c1c;text-align:center;margin:12px 0}
+a.b{display:block;text-align:center;text-decoration:none;padding:15px;border-radius:12px;font-weight:700;font-size:17px;margin-top:10px}.p{background:#7a1d6e;color:#fff}.s{background:#fff;color:#5a1650;border:1.5px solid #d8c4e3}
+.g{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.g a{font-size:14px;padding:12px 4px;margin:0}.n{font-size:13px;color:#777;text-align:center;margin-top:12px}.u{font-family:monospace;font-size:16px;background:#faf6fc;padding:8px;border-radius:8px;text-align:center;margin-top:8px}</style></head>
+<body><div class="top"><b>BANISHREE KALANIKETAN</b><br><small>Fee Payment</small></div><div class="c" id="c"></div>
+<script>(function(){var PA="8895580661@okbizaxis",PN="BANISHREE KALANIKETAN",q=new URLSearchParams(location.search),am=parseFloat(q.get('am'))||0,tn=(q.get('tn')||'Fee').slice(0,60),s=(q.get('s')||'').slice(0,60),r=(q.get('r')||'').slice(0,20);
+function e(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+var qs='pa='+PA+'&pn='+encodeURIComponent(PN)+(am>0?'&am='+am.toFixed(2):'')+'&cu=INR&tn='+encodeURIComponent(tn),up='upi://pay?'+qs;
+document.getElementById('c').innerHTML=(s?'<div class="r"><span>Student</span><b>'+e(s)+'</b></div>':'')+(r?'<div class="r"><span>Reg / Roll No</span><b>'+e(r)+'</b></div>':'')+'<div class="amt">'+(am>0?'₹'+am.toLocaleString('en-IN'):'')+'</div>'
++'<a class="b p" href="'+up+'">📱 UPI app kholkar pay karein</a><div class="n">iPhone ho ya upar wala button na chale to:</div><div class="g"><a class="b s" href="gpay://upi/pay?'+qs+'">GPay</a><a class="b s" href="phonepe://pay?'+qs+'">PhonePe</a><a class="b s" href="paytmmp://pay?'+qs+'">Paytm</a></div>'
++'<div class="n">Ya kisi bhi UPI app me ye UPI ID daal kar pay karein:</div><div class="u">'+e(PA)+'</div><div class="n">Note / Remark me <b>'+e(r||tn)+'</b> zaroor likhein – isse fee apne aap aapke bachche ke khate me judegi. 🙏</div>';
+if(/Android/i.test(navigator.userAgent)&&am>0)setTimeout(function(){location.href=up},600)})();</script></body></html>
