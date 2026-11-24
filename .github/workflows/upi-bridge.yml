@@ -7,6 +7,9 @@ on:
       - '.github/workflows/upi-bridge.yml'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,3 +37,23 @@ jobs:
           name: Dhanlekh-UPI-Bridge-apk
           path: Dhanlekh-UPI-Bridge.apk
           if-no-files-found: error
+
+      # keep the built app in the branch as well, so it can be fetched with git
+      - name: Commit the APK
+        run: |
+          mkdir -p upi-bridge/dist
+          cp Dhanlekh-UPI-Bridge.apk upi-bridge/dist/Dhanlekh-UPI-Bridge.apk
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add -f upi-bridge/dist/Dhanlekh-UPI-Bridge.apk
+          git commit -m "Build the UPI Bridge APK [skip ci]" || exit 0
+          git push origin HEAD:${GITHUB_REF_NAME}
+
+      - name: Publish a release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="upi-bridge-$(date +%Y%m%d-%H%M)"
+          gh release create "$TAG" Dhanlekh-UPI-Bridge.apk \
+            --title "Dhanlekh UPI Bridge $TAG" \
+            --notes "Install this on the shop phone, paste the address from the ERP, and allow notification access." 
